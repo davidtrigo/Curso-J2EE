@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Calculadora de Figuras</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1>Calculadora de Figuras</h1>
+        <h3>Complete los datos del cubo</h3>
+      
+        
+        
+        
+     
+       <form action=" ./servlet/calcular" method = "post"> 
+        <table>  
+            <tr>
+                
+                 <td colspan="3" align="right"><img src="./img/figCubo.png"></td>
+                
+            </tr>
+            <tr>
+             <td > <label>Arista:</label></td>
+                <td colspan="2"> <input type="number" name="arista" required  step="any"></td>
+              
+            </tr>
+              <tr>
+	            <td colspan="2"/>
+	            <td  align ="center">
+	            		<input type="submit" value="Calcular" style="height:30px;width:80px">
+	            </td>
+            </tr>
+            <tr>
+            <td colspan="2"/> 
+            	<td align ="center">
+            		<button onclick="window.location.href='./index.html'" style="height:30px;width:80px">Menu</button>
+            	</td>
+            </tr>
+            
+            <tr>
+				<td> <input type="radio" name="figura" value="cubo"  checked="checked" style="display:none "><br></td>
+			 	<td>  <input type="hidden" name="generatriz" value="0"></td>
+				<td> <input type="hidden" name="altura" value =0> </td>
+				<td><input type="hidden" name="radio" value=0></td>
+				</tr>
+		 
+        </table>
+			</form>
+    </body>
+</html>
