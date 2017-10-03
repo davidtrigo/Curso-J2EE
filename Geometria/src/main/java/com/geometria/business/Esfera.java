@@ -6,9 +6,9 @@ public class Esfera extends Figura{
 	
 public float calculaArea(){
 		
-		Esfera esfera = new Esfera();
+	 
 		
-		float r = esfera.getRadio();
+		float r = this.getRadio();
 		
 		float aT = (float) ((4 * Math.PI)*(r*r));
 		
@@ -17,9 +17,9 @@ public float calculaArea(){
 
 	public float calculaVolumen(){
 		
-		Esfera esfera = new Esfera();
+	 
 		
-		float r = esfera.getRadio();
+		float r = this.getRadio();
 		
 		float v= (float) ((4 * Math.PI)*(r*r*r)/3);
  

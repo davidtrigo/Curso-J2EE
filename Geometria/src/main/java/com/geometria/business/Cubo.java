@@ -6,9 +6,9 @@ public class Cubo extends Figura{
 	
 public float calculaArea(){
 		
-		Cubo cubo = new Cubo();
+ 
 		
-		float arista = cubo.getArista();
+		float arista = this.getArista();
 		
 		
 		float aT = (6*(arista*arista));
@@ -17,11 +17,10 @@ public float calculaArea(){
 	}
 
 	public float calculaVolumen(){
-		
-		Cubo cubo = new Cubo();
+	 
 		 
 
-		float arista = cubo.getArista();
+		float arista = this.getArista();
 		
 		float	v = arista *arista*arista;
 		
