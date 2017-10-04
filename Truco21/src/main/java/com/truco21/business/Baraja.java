@@ -3,16 +3,9 @@ package com.truco21.business;
 import java.util.ArrayList;
 import java.util.Random;
 
-
-
-
 public class Baraja extends ArrayList<Carta>{
 	
- 
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	ArrayList<Carta> paqueteCartas;
@@ -34,15 +27,14 @@ public class Baraja extends ArrayList<Carta>{
 
 
 	/*
-	 *1  crear carta                                                           
+	 *crearBaraja()                                                        
 	 * 
+	 * método que crea un ArrayList de objetos Carta
 	 * 
 	 */
-	 
+
 	
-	
-	
-	public ArrayList<Carta> crearbaraja(){ 
+	public ArrayList<Carta> crearBaraja(){ 
 		
 
 		String[] palo = {"corazon","diamantes","trebol","pica"};
@@ -72,18 +64,16 @@ public class Baraja extends ArrayList<Carta>{
 	 * 
 	 * Método que baraja el mazo de cartas
 	 * 
+	 *de  la baraja creada  guarda en el Arraylist mazo21  21 objetos de tipo Carta
 	 * 
+	 * @return mazo21   retorna un arrayList de objetos Cartas  
 	 * */
 		public  ArrayList<Carta> barajar(){
-				
-			
+					
 			Baraja baraja = new Baraja();
-			baraja.crearbaraja();
+			baraja.crearBaraja();
 			mazo21 = new ArrayList<>();
-			
-	 
-		
-			 
+	
 			Random random = new Random();
 
 			// Mientras queden cartas en la baraja 
@@ -102,14 +92,12 @@ public class Baraja extends ArrayList<Carta>{
 			
 		}
 		
-		
-	
-	
+
 	/*
 	 * crearMazo()
 	 * 
 	 * Método que crea un mazo 
-	 * int desde   indice del inicio del mazo
+	 * int <i>desde</i> indice del inicio del mazo
 	 * 
 	 * */
 		public ArrayList<Carta> crearMazo(int desde){
@@ -132,25 +120,47 @@ public class Baraja extends ArrayList<Carta>{
 		ArrayList<Carta> mazo1  = new ArrayList<>();
 		ArrayList<Carta> mazo2  = new ArrayList<>();
 		ArrayList<Carta> mazo3  = new ArrayList<>();
-		ArrayList<Carta> mazo4  = new ArrayList<>();
+		ArrayList<Carta> mazoTemp  = new ArrayList<>();
+		Baraja baraja = new Baraja();
 		
+		mazo1 = baraja.crearMazo(0);
+		mazo2=  baraja.crearMazo(7);
+		mazo3= baraja.crearMazo(13);
 		
 		if (monton.equals("I")){ // mazo de la izquierda
 			
-			 /**TODO*/ 
-		} else if  (monton.equals("C")){ 
+			mazoTemp= mazo1;
+			mazo1=mazo2;
+			mazo2=mazoTemp;
+			mazo3=mazo3;
+			
+		 
+			
+		} else if  (monton.equals("C")){  // mazo Central
+			
+			mazoTemp= mazo2;
+			
+			mazo1=mazo1;
+			mazo2=mazoTemp;
+			mazo3=mazo3;
 			
 			
 			
-		} else if (monton.equals("D")){ 
 			
+			
+		} else if (monton.equals("D")){  // mazo de la dercha
+			
+			mazoTemp =mazo3;
+			mazo1=mazo3;
+			mazo2=mazoTemp;
+			mazo3=mazo3;
 			
 			
 		}
 		
 		
 		
-		return null;
+		return mazoTemp;
 	}
 		
 
