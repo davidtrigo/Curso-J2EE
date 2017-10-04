@@ -14,7 +14,7 @@ import com.geometria.business.Cilindro;
 import com.geometria.business.Cono;
 import com.geometria.business.Cubo;
 import com.geometria.business.Esfera;
-import com.geometria.business.Figura;
+
 
 /**
  * Servlet implementation class ServletCalcular
@@ -36,16 +36,16 @@ public class ServletCalcular extends HttpServlet {
 		String imagen="";
 	 
 		valor= request.getParameter("arista");
-		float arista=(valor!="")?Float.parseFloat(valor):0;
+		float arista=(valor!=null)?Float.parseFloat(valor):0;
  
 		valor = request.getParameter("radio");
-		float radio=(valor!="")?Float.parseFloat(valor):0;
+		float radio=(valor!=null)?Float.parseFloat(valor):0;
 		
 		valor = request.getParameter("generatriz");
-		float generatriz=(valor!="")?Float.parseFloat(valor):0;
+		float generatriz=(valor!=null)?Float.parseFloat(valor):0;
 
 		valor = request.getParameter("altura");
-		float altura=(valor!="")?Float.parseFloat(valor):0;
+		float altura=(valor!=null)?Float.parseFloat(valor):0;
 		
 		if (figura!=null) {
 			
@@ -76,10 +76,10 @@ public class ServletCalcular extends HttpServlet {
 				
 				
 				
-			}else if (figura =="esfera") {
+			}else if (figura.equals("esfera")) {
 				Esfera esfera = new Esfera();
 				
-				esfera.setAltura(altura);
+			
 				esfera.setRadio(radio);
 				
 				area =	esfera.calculaArea();
@@ -87,7 +87,7 @@ public class ServletCalcular extends HttpServlet {
 				imagen= "/Geometria/img/figEsfera.png";
 				
 				
-			}else{ //cono
+			}else if (figura.equals("cono")){ //cono
 				
 				Cono cono = new Cono();
 				
@@ -121,9 +121,9 @@ public class ServletCalcular extends HttpServlet {
 		out.println("<p>"+figura+"</p>");
 		out.println("<p><img src='"+imagen+"'></p>");
 				 
-		out.println("<p>Area"+df.format(area)+"</p>");
-		out.println("<p>Volumen"+df.format(volumen)+"</p>");
-		out.println("<p><button onclick='window.location.href= ./index.html'style='height:30px;width:80px'>Menu</button>  </p>");
+		out.println("<p>Area:  "+df.format(area)+"</p>");
+		out.println("<p>Volumen:  "+df.format(volumen)+"</p>");
+		out.println("<button onclick=window.location.href='/Geometria/index.html' style=height:30px;width:80px>Menu</button>");
 		
 		out.println("</body>");
 		out.println("</html>");

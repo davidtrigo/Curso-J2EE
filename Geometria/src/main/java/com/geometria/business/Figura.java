@@ -1,7 +1,8 @@
 package com.geometria.business;
 
+import javax.ejb.Stateless;
 
-
+@Stateless
 public  class Figura {
 	
 	
