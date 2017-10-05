@@ -4,16 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.geometria.business.Cilindro;
-import com.geometria.business.Cono;
-import com.geometria.business.Cubo;
-import com.geometria.business.Esfera;
+import com.geometria.business.ServicesGeometria;
+import com.geometria.business.ServicesGeometria.Geo;
 
 
 /**
@@ -22,7 +21,9 @@ import com.geometria.business.Esfera;
 @WebServlet("/ServletCalcular")
 public class ServletCalcular extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+     
+	@EJB
+	private ServicesGeometria services;
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,9 +33,11 @@ public class ServletCalcular extends HttpServlet {
 		
 		String figura = request.getParameter("figura");
 		String valor; 
-		float volumen=0, area=0;
-		String imagen="";
-	 
+//		float volumen=0, area=0;
+//		String imagen="";
+		Geo data = null; 
+		
+		
 		valor= request.getParameter("arista");
 		float arista=(valor!=null)?Float.parseFloat(valor):0;
  
@@ -48,61 +51,25 @@ public class ServletCalcular extends HttpServlet {
 		float altura=(valor!=null)?Float.parseFloat(valor):0;
 		
 		if (figura!=null) {
-			
-			 
-			
+
 			if (figura.equals("cubo")) {
 				
-				
-				Cubo cubo = new Cubo();
-				
-				cubo.setArista(arista);
-				area = 	cubo.calculaArea();
-				volumen= 	cubo.calculaVolumen();
-				imagen= "/Geometria/img/figCubo.png";
-				
-				
-				
+				data = services.calcularCubo(arista, "/Geometria/img/figCubo.png");
+			 	
 			} else if (figura.equals("cilindro")) {
-				
-				Cilindro cilindro = new Cilindro();
-				
-				cilindro.setAltura(altura);
-				cilindro.setRadio(radio);
-				
-				area = cilindro.calculaArea();
-				volumen= cilindro.calculaVolumen();
-				imagen= "/Geometria/img/figCilindro.png";
-				
-				
+			
+				data = services.calcularCilindro(altura, radio,"/Geometria/img/figCilindro.png");
 				
 			}else if (figura.equals("esfera")) {
-				Esfera esfera = new Esfera();
 				
-			
-				esfera.setRadio(radio);
-				
-				area =	esfera.calculaArea();
-				volumen= esfera.calculaVolumen();
-				imagen= "/Geometria/img/figEsfera.png";
+				data = services.calcularEsfera(radio,"/Geometria/img/figEsfera.png");
 				
 				
-			}else if (figura.equals("cono")){ //cono
+			}else if (figura.equals("cono")){ 
 				
-				Cono cono = new Cono();
-				
-				cono.setGeneratriz(generatriz);
-				cono.setRadio(radio);
-				cono.setAltura(altura);
-				
-				area =	cono.calculaArea();
-			volumen=	cono.calculaVolumen();
-			imagen= "/Geometria/img/figCono.png";
-
-			}
-			
-			
-		} else {
+				 data = services.CalcularCono(altura, radio, generatriz, "/Geometria/img/figCono.png");
+			}			
+		}else {
 			System.out.println("valor nulo en figura");
 
 		}
@@ -118,11 +85,11 @@ public class ServletCalcular extends HttpServlet {
 		out.println("<title>Resultado</title>");
 		out.println("</head>");
 		out.println("<body>");
-		out.println("<p>"+figura+"</p>");
-		out.println("<p><img src='"+imagen+"'></p>");
+		out.println("<p><h1>"+figura+"</h1></p>");
+		out.println("<p><img src='"+data.imagen+"'></p>");
 				 
-		out.println("<p>Area:  "+df.format(area)+"</p>");
-		out.println("<p>Volumen:  "+df.format(volumen)+"</p>");
+		out.println("<p><strong>Area:</strong>  "+df.format(data.area)+"</p>");
+		out.println("<p><strong>Volumen: </strong> "+df.format(data.volumen)+"</p>");
 		out.println("<button onclick=window.location.href='/Geometria/index.html' style=height:30px;width:80px>Menu</button>");
 		
 		out.println("</body>");
